@@ -1,0 +1,39 @@
+# Bağımlılıklar
+node_modules/
+
+# Expo / native (prebuild ile her seferinde üretilir, CNG yaklaşımı)
+.expo/
+dist/
+web-build/
+ios/
+android/
+expo-env.d.ts
+
+# Ortam ve gizli dosyalar — ASLA commitleme
+.env
+.env.*
+!.env.example
+credentials/
+google-services.json
+GoogleService-Info.plist
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+.firebaserc
+
+# Firebase emülatör verisi / loglar
+firebase/emulator-data/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
+# Sistem / editör
+.DS_Store
+*.log
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.claude/

@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "fallavi-dev",
+    "prod": "fallavi-prod"
+  }
+}

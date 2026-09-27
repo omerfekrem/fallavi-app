@@ -1,0 +1,33 @@
+rules_version = '2';
+
+// VARSAYILAN: her şey kapalı. Sadece açıkça izin verdiğin yollar açılır.
+// Sıkı kurallar = kötü niyetli toplu okuma/yazma ile faturanın şişmesini engeller.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function isOwner(uid) { return signedIn() && request.auth.uid == uid; }
+    function validSize() { return request.resource.data.size() <= 20; } // alan sayısı sınırı
+
+    match /users/{uid} {
+      allow get: if isOwner(uid);
+      allow list: if false; // kullanıcı listesini kimse çekemez
+      allow create: if isOwner(uid)
+        && validSize()
+        && request.resource.data.uid == uid
+        && request.resource.data.provider in ['google.com', 'apple.com'];
+      allow update: if isOwner(uid)
+        && validSize()
+        // kimlik alanları değiştirilemez
+        && request.resource.data.uid == resource.data.uid
+        && request.resource.data.provider == resource.data.provider
+        && request.resource.data.createdAt == resource.data.createdAt;
+      allow delete: if false;
+    }
+
+    // Tanımlanmamış her yol reddedilir
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

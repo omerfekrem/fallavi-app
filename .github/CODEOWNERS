@@ -1,0 +1,4 @@
+# İki geliştirici: kullanıcı adlarını değiştir. Her PR'da diğer kişi otomatik reviewer olur.
+*                         @gelistirici1 @gelistirici2
+/firebase/                @gelistirici1 @gelistirici2
+/app.config.ts            @gelistirici1 @gelistirici2
