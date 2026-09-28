@@ -35,8 +35,8 @@ git pull --ff-only
 npm ci                          # package-lock.json değiştiyse (kilit dosyasını değiştirmeden kurar)
 ```
 
-`git checkout development` "did not match" derse `development` dalı henüz açılmamıştır (O-01). Özellik dalını
-`master`'dan açma; tek istisna A-01 (IS_PLANI 3.7).
+`development` 28 Eylül'de açıldı (O-01, PR #1 ile). `git checkout development` "did not match" derse önce
+`git fetch --prune origin` çalıştır. Özellik dalını `master`'dan açma.
 
 - `git pull` sonrası `package.json`'a **native** paket geldiyse development build'i yenile: `npm run android` (ya da `npm run ios`) veya `eas build --profile development`.
 - Firebase'e kota harcamadan çalışmak için ayrı bir terminalde: `npm run emulators`.

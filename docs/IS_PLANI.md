@@ -3,7 +3,7 @@
 Ömer ve Abdullah için modül bazlı iş bölümü, dal (branch) stratejisi ve sürüm süreci.
 Masaya oturunca adım adım ne yapılacağı: [DAL_AKISI.md](DAL_AKISI.md).
 
-> Hazırlanma: 28 Eylül 2026 · Durum: **taslak**, iki denetçi incelemesinden sonra A-01 görevinin PR'ıyla depoya girer.
+> Hazırlanma: 28 Eylül 2026 · Durum: **taslak**, iki denetçi incelemesinden sonra ayrı bir docs PR'ıyla (#1) depoya girdi.
 > Kapsam: ilk sürüm (MVP, `v0.1.0`). "S-" ile başlayan kodlar 8. bölümdeki açık sorulardır.
 
 ## İçindekiler
@@ -33,7 +33,7 @@ Firebase ücretsiz Spark planında kalacak biçimde tasarlanmış ([FIREBASE_MAL
 
 ### 1.2 Depo durumu
 
-- Tek commit (27 Eylül 2026, Ömer). Yalnız `master` dalı var; issue, PR ve CI çalışması yok.
+- Tek commit (27 Eylül 2026, Ömer). Başta yalnız `master` dalı vardı; `development` 28 Eylül'de açıldı (O-01). İlk PR bu belgeleri ekleyen #1; issue ve CI çalışması yok.
 - Depo **herkese açık** (public). Yazma yetkisi: `omerfekrem` (sahibi), `abdkisa`.
 - `ios/` ve `android/` repoda yok (CNG); `npx expo prebuild --clean` ile üretilir.
 - Native modüller yüzünden **Expo Go ile çalışmaz**; development build gerekir.
@@ -332,8 +332,8 @@ Gerçekçi beklenti 6 değil 8 hafta civarı. Kayma olursa önce O-13 ve A-10 (m
 
 | ID | Görev | Sahibi | Dal | Bağımlılık | Boyut | Sprint | Kabul ölçütü |
 |---|---|---|---|---|---|---|---|
-| O-01 | `development` dalını `master`'dan aç | Ömer | — | — | S | 0 | `development` GitHub'da görünüyor, `master` ile aynı commit'te |
-| A-01 | Dal ve CI düzeni: `ci.yml` → `master`/`development`; CODEOWNERS → `@omerfekrem @abdkisa`; CONTRIBUTING ve README düzeltmeleri; `task` etiketi; bu iki belge | Abdullah | `chore/ci-dal-duzeni` | O-01 | S | 0 | PR'da `check` çalışıp yeşil; belgelerde `main`/`develop` kalmadı |
+| O-01 | `development` dalını `master`'dan aç. **Yapıldı (28 Eylül, PR #1 ile)** | Ömer | — | — | S | 0 | `development` GitHub'da görünüyor, `master` ile aynı commit'te |
+| A-01 | Dal ve CI düzeni: `ci.yml` → `master`/`development`; CODEOWNERS → `@omerfekrem @abdkisa`; CONTRIBUTING ve README düzeltmeleri; `task` etiketi | Abdullah | `chore/ci-dal-duzeni` | O-01 (yapıldı) | S | 0 | PR'da `check` çalışıp yeşil; belgelerde `main`/`develop` kalmadı |
 | O-02 | GitHub ayarları: dal koruma, birleştirme türleri, varsayılan dal (Bölüm 7) | Ömer | — | A-01 | S | 0 | Korunan dallara doğrudan push reddediliyor; onaysız PR birleşmiyor |
 | O-03 | Firebase `fallavi-dev` ve `fallavi-prod`: iOS + Android uygulamaları, Google + Apple girişi, Firestore (`eur3`), kurallar yüklü; Abdullah proje üyesi; `.env` ve credentials ortak kasada. **Sprint 0'ın ilk işi:** credentials olmadan kimse development build alamaz (Tespit 17) | Ömer | — | — | M | 0 | İki geliştirici de development build'de `fallavi-dev`'e giriş yapabiliyor |
 | O-05 | Navigasyon iskeleti: `(tabs)` (Ana sayfa, Fallarım, Profil) + tüm MVP rotaları için yer tutucu ekranlar; mevcut `(app)/index.tsx` `(tabs)/index.tsx`'e taşınır | Ömer | `feature/nav-sekme-iskeleti` | O-01 | S | 0 | Sekmeler ve tüm rotalar açılıyor; `/` rotasında tek ekran var; typecheck yeşil |
@@ -365,7 +365,7 @@ Her satır için GitHub'da görev şablonuyla bir issue açılır (görevin sahi
 
 ```mermaid
 flowchart LR
-  O01["O-01 development"] --> A01["A-01 dal ve CI düzeni"]
+  O01["O-01 development (yapıldı)"] --> A01["A-01 dal ve CI düzeni"]
   A01 --> O02["O-02 dal koruma"]
   A01 --> A02["A-02 test altyapısı"]
   O01 --> O05["O-05 nav iskeleti"]
@@ -398,7 +398,7 @@ flowchart LR
 
 ### 3.6 Ömer'in listesi
 
-- **Sprint 0:** [ ] O-01 `development` dalı (ilk gün) · [ ] O-03 Firebase projeleri (ilk günlerde; ikinizin de development build'i buna bağlı) · [ ] O-05 navigasyon iskeleti · [ ] O-02 dal koruma (A-01 birleşince)
+- **Sprint 0:** [x] O-01 `development` dalı (yapıldı, 28 Eylül, PR #1 ile) · [ ] O-03 Firebase projeleri (ilk günlerde; ikinizin de development build'i buna bağlı) · [ ] O-05 navigasyon iskeleti · [ ] O-02 dal koruma (A-01 birleşince)
 - **Sprint 1:** [ ] O-04 `eas init` (sprintin ilk günü; A-04 bekliyor) · [ ] O-06 UI kit · [ ] O-07 auth doğrulama
 - **Sprint 2:** [ ] O-08 fotoğraf adımı · [ ] O-09 gönderim adımı
 - **Sprint 3:** [ ] O-10 profil · [ ] O-11 hesap silme
@@ -408,7 +408,7 @@ flowchart LR
 
 ### 3.7 Abdullah'ın listesi
 
-- **Sprint 0:** [ ] A-01 dal ve CI düzeni (ilk iş; `development` henüz yoksa dal yerelde `master`'dan açılıp çalışılır, yalnız PR `development`'ı bekler) · [ ] A-02 test altyapısı (Firebase ve cihaz gerektirmez)
+- **Sprint 0:** [ ] A-01 dal ve CI düzeni (ilk iş; dal `development`'tan açılır) · [ ] A-02 test altyapısı (Firebase ve cihaz gerektirmez)
 - **Sprint 1:** [ ] A-03 fal veri sözleşmesi · [ ] A-04 EAS preview · [ ] A-05 emülatör ve tohum
 - **Sprint 2:** [ ] A-06 Fallarım listesi · [ ] A-07 fal detayı
 - **Sprint 3:** [ ] A-08 yorum motoru
@@ -466,13 +466,8 @@ commitlint dal adını denetlemez, yalnız commit mesajını denetler; bu eşle�
 
 Sıra önemli: CI önce `development`'ı tanımalı, dal koruması en son açılmalı (`check` işinin listede görünmesi için en az bir kez çalışmış olması gerekir).
 
-1. **Ömer (O-01):** `development` dalını açar.
-   ```bash
-   git checkout master
-   git pull --ff-only
-   git push origin master:development
-   ```
-2. **Abdullah (A-01):** `chore/ci-dal-duzeni` dalında `ci.yml`, CODEOWNERS, CONTRIBUTING ve README'yi düzeltir, bu iki belgeyi ekler, `development`'a PR açar. Ömer onaylar, Abdullah birleştirir.
+1. **O-01, yapıldı (28 Eylül, PR #1 ile):** `development` dalı `master`'dan açıldı. Bu iki belge de ayrı bir docs PR'ıyla (#1) girdi.
+2. **Abdullah (A-01):** `chore/ci-dal-duzeni` dalında `ci.yml`, CODEOWNERS, CONTRIBUTING ve README'yi düzeltir, `development`'a PR açar. Ömer onaylar, Abdullah birleştirir.
 3. **Ömer (O-02):** Bölüm 7'deki GitHub ayarlarını açar.
 4. **İkisi:** `git fetch --prune origin` (önceden klonlanmış depo `development`'ı ancak böyle görür), ilk kurulum (README'deki "İlk kurulum" bölümü), sonra development build (O-03'ün credentials dosyaları gerekir).
 
